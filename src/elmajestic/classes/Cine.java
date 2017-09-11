@@ -6,6 +6,7 @@
 package elmajestic.classes;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -15,6 +16,7 @@ public class Cine {
 
     private String nombre;
     private ArrayList<Pelicula> listaPelicula = new ArrayList<>();
+    private ArrayList<Sala> listaSalas = new ArrayList<>();
 
     public String getNombre() {
         return nombre;
@@ -31,6 +33,7 @@ public class Cine {
     public void setListaPelicula(ArrayList<Pelicula> listaPelicula) {
         this.listaPelicula = listaPelicula;
     }
+// ------------------ PELICULAS ------------------
 
     public void agregarPelicula(String titulo, String genero) {
         Pelicula unaPelicula = new Pelicula();
@@ -38,22 +41,51 @@ public class Cine {
         unaPelicula.setGenero(genero);
 
         listaPelicula.add(unaPelicula);
+        System.out.println("Película agregada.");
     }
 
-    //tengo que convertir mi listaPeliculas en un Array<String>
-    //porque no quiero que MiApp acceda a Pelicula
     public ArrayList<String> obtenerInfoPeliculas() {
         //creo un array listado, inicializo
-        ArrayList<String> listado = new ArrayList<String>();
+        ArrayList<String> arrayPeliculas = new ArrayList<String>();
         // fore recorre un listado (en este caso listaPelicula) y los asigna a una nueva
         //pelicula de Clase Pelicula
 
         for (Pelicula pelicula : listaPelicula) {
             //agrego a listado cada pelicula recorrida, con getter obtengo los atributos de Pelicula
-            listado.add(pelicula.getTitulo() + " - " + pelicula.getGenero());
+            arrayPeliculas.add(pelicula.getTitulo() + " - " + pelicula.getGenero());
 
         }
-        return listado;
+
+        return arrayPeliculas;
+    }
+
+    // ------------------ SALAS ------------------
+    public void agregarSala(int numeroID, int cantAsientos, float precioEntrada) {
+        Sala unaSala = new Sala();
+        unaSala.setNumeroId(cantAsientos);
+        unaSala.setCantAsientos(cantAsientos);
+        unaSala.setPrecioEntrada(precioEntrada);
+
+        listaSalas.add(unaSala);
+        System.out.println("Sala agregada.");
+    }
+
+    public ArrayList<String> obtenerInfoSalas() {
+
+        ArrayList arraySalas = new ArrayList<String>();
+
+        for (Sala sala : listaSalas) {
+            arraySalas.add("- Sala nº: " + sala.getNumeroId() + "  - Cantidad de asientos: "
+                    + sala.getCantAsientos() + " - Precio entrada: " + sala.getPrecioEntrada());
+        }
+        return arraySalas;
+
+    }
+
+    public void agregarProyeccion(String horario, String pelicula, int numeroIdSala) {
+        Proyeccion unaProyeccion = new Proyeccion();
+        unaProyeccion.setHorario(horario);
+
     }
 
 }//fin clase Cine
